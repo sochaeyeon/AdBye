@@ -1,4 +1,4 @@
-# 🔍 re:view — AI 기반 광고성 리뷰 탐지 서비스
+# 🔍 AdBye — AI 기반 광고성 리뷰 탐지 서비스
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
 ![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white)
