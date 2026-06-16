@@ -1,90 +1,146 @@
-# 🔍 re:view - AI 기반 광고성 리뷰 탐지 서비스 ✨
+# 🔍 re:view — AI 기반 광고성 리뷰 탐지 서비스
 
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/) 
-[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/) 
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/) 
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge)](https://fastapi.tiangolo.com/) 
-[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)  
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
+![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+
+<br>
+
+## 👥 팀 소개
+
+| 역할 | 이름 |
+|------|------|
+| 팀장 | 류은규 |
+| 팀원 | 소채연 |
+| 팀원 | 소현서 |
+
+<br>
 
 ## 📖 프로젝트 소개
-소비자는 제품 구매 전 리뷰를 주요 판단 기준으로 삼지만,  
-**광고성 리뷰의 확산**으로 인해 리뷰 신뢰도가 낮아지는 문제가 있습니다.  
-이를 해결하기 위해 AI를 활용하여 리뷰의 **진위 여부를 자동 판별**하는 시스템을 개발하였습니다.
 
----
+소비자는 제품 구매 전 리뷰를 주요 판단 기준으로 활용하지만, 광고성 리뷰의 증가로 인해 리뷰에 대한 신뢰도는 지속적으로 낮아지고 있습니다.
 
-## 🖼️ 시연 영상 및 이미지
-<p align="left">
-   <a href="https://youtu.be/HhGPVoTFN2Y?si=pCXGb2kFzzdIu_g-">
-      <img src="Thumbnail.png" width="600" />
-   </a>
-</p>
+본 프로젝트는 사용자가 리뷰를 판단하는 데 참고할 수 있는 **의사결정 보조 시스템(Decision Support System)** 을 목표로 개발되었습니다. 리뷰 텍스트와 이미지를 기반으로 광고성 리뷰 집단과의 유사도를 분석하고, 이를 시각화 및 요약하여 사용자가 보다 신뢰성 있는 구매 결정을 내릴 수 있도록 지원합니다.
 
-> 📥 **[Download MP4 (GitHub Release)](https://github.com/eun903/adReviewDetermine/releases)**
+<br>
 
----
+## 🖼️ 화면 구성
+
+| 시작 페이지 | 메인 페이지 | 분석 완료 |
+|:-----------:|:----------:|:--------:|
+| ![시작](./screenshots/start.png) | ![메인](./screenshots/main.png) | ![분석완료](./screenshots/result.png) |
+
+> 스크린샷은 `screenshots/` 폴더에 `start.png`, `main.png`, `result.png` 이름으로 넣어주세요.
+
+<br>
 
 ## ⚙️ 기술 스택
+
 | 구분 | 사용 기술 |
-|------|------------|
-| **Frontend** | React, Recharts (데이터 시각화) |
-| **Backend** | Spring Boot, Spring Security (JWT), Spring Data JPA |
-| **AI Server** | FastAPI, Python, Sentence-Transformers (all-MiniLM-L6-v2) |
-| **LLM / OCR** | Google Gemini API, Tesseract OCR |
-| **Database** | MySQL |
+|------|----------|
+| Frontend | React, Recharts |
+| Backend | Spring Boot, Spring Security (JWT), Spring Data JPA |
+| AI Server | FastAPI, Python, Sentence-Transformers (all-MiniLM-L6-v2) |
+| LLM / OCR | Google Gemini API, Tesseract OCR |
+| Database | MySQL |
 
----
+<br>
 
-## 🧩 시스템 아키텍처 및 흐름도
+## 🧩 시스템 아키텍처
 
-### **System Architecture**
-```text
-[React Client] <───(JWT Auth)───> [Spring Boot Server] <───(REST API)───> [FastAPI AI Engine]
-                                         │                                     │
-                                   [MySQL DB]                          [Fine-tuned Model]
+```
+[React Client] ──(JWT Auth)──▶ [Spring Boot Server] ──(REST API)──▶ [FastAPI AI Engine]
+                                        │                                      │
+                                  [MySQL DB]                         [Fine-tuned Model]
 ```
 
----
+<br>
 
-### 🔍 유사도 분석 과정
-1. **데이터 수집**
-   - 광고성 리뷰 800개, 비광고성 리뷰 567개 수집
-3. **모델 사용**
-   - `SentenceTransformer: all-MiniLM-L6-v2` 
-5. **파인튜닝 & 문장 임베딩**
-   - 광고성끼리 가깝게, 비광고성끼리 가깝게 학습
-   - 광고성과 비광고성끼리는 멀게 학습
-   - 리뷰를 384차원 벡터로 변환
-7. **키워드 가중치 적용**
-   - 광고 관련 단어에 +가중치, 비광고 관련 단어에 -가중치 적용
-9. **통계 분석**
-    - `p-value < 0.001`, `Cohen's d`를 통해 그룹간 차이 검증
+## 🔍 유사도 분석 프로세스
 
----
+```
+1. 데이터 수집
+   └── 광고성 리뷰 800개, 비광고성 리뷰 567개 수집
 
-### 데이터 수집 및 서비스 정책
+2. 모델 사용
+   └── SentenceTransformer: all-MiniLM-L6-v2
 
-1. 사용자 주도 분석 (User-Centric Analysis)
+3. 파인튜닝 & 문장 임베딩
+   └── 광고성끼리 가깝게, 비광고성끼리 가깝게 학습
+   └── 리뷰를 384차원 벡터로 변환
 
- 서비스의 핵심 로직을 외부 플랫폼 크롤링이 아닌, 사용자가 직접 제공한 데이터(텍스트/이미지) 기반으로 설계하여 데이터 활용의 정당성을 확보하고 법적 리스크를 최소화하였습니다.
+4. 키워드 가중치 적용
+   └── 광고 관련 단어 +가중치 / 비광고 관련 단어 -가중치
 
-2. 리스크 관리 및 데이터 마스킹 (Risk Management)
+5. 통계 분석
+   └── p-value < 0.001, Cohen's d로 그룹 간 차이 검증
+```
 
- 외부 플랫폼 연동 시 발생할 수 있는 운영 정책 이슈를 고려하여, 외부 데이터는 핵심 지표(유사도 %) 위주로만 제공하며 세부 리뷰 내용은 익명화(Masking) 처리를 통해 정보 노출을 최소화하였습니다.
+<br>
 
-3. 확장성 고려 (Future Scalability)
+## 🧠 핵심 아이디어
 
- 향후 플랫폼별 공식 API 제휴 또는 사용자 권한 위임 기반의 데이터 접근 방식을 고려한 아키텍처 설계를 마쳤으며, 정책 변화에 따라 유연하게 대응할 수 있도록 구조화하였습니다.
+### 1. 대조학습 기반 임베딩 파인튜닝
 
----
+SentenceTransformer(all-MiniLM-L6-v2)를 기반으로 학습 데이터를 구성하였습니다.
 
-📊 **결과 요약**
-- 분석 결과, 광고성 리뷰 그룹은 특정 어휘 패턴과 문체 구조에서 매우 높은 **유사도**를 보임을 확인하였습니다.
-- 반면, 실제 소비자 리뷰 그룹은 개인별 주관적 표현으로 인해 **문장 임베딩 공간 내에서의 분산도가 높게**나타나는 특징을 보였습니다.
-- 모델 파인튜닝 및 가중치 로직 적용 후, 두 그룹 간의 차이를 'p-value < 0.001' 수준에서 검증함으로써 **통계적으로 유의미하고 신뢰도 높은 판별 지표**를 구축하였습니다.
----
+| 쌍 | 유사도 |
+|----|--------|
+| 광고 리뷰 ↔ 광고 리뷰 | 1.0 |
+| 비광고 리뷰 ↔ 비광고 리뷰 | 1.0 |
+| 광고 리뷰 ↔ 비광고 리뷰 | 0.0 |
 
- ### 📈 프로젝트 성과
-  - 대조학습 기반 파인튜닝과 가중치 보정 로직을 통해 탐지 정확도를 **기존 대비 45% 개선**하였습니다.
-  - 분석 결과에 Gemini 2.0 기반의 핵심 요약 기능을 통합하여, 사용자가 방대한 리뷰 내용을 **직관적으로 파악할 수 있도록 UX를 개선**하였습니다.
-  - AI 추론 엔진(FastAPI)과 메인 서버(Spring Boot), 그리고 시각화 대시보드를 유기적으로 연결하여 **데이터 수집부터 분석, 시각화까지의 전 과정을 원스톱 서비스로 구현** 하였습니다.
+### 2. 키워드 가중치 기반 보정
+
+`협찬`, `제공`, `체험단` 등 광고성 표현에 가중치를 부여하여 딥러닝 임베딩과 도메인 지식을 결합한 **하이브리드 분석 구조**를 설계하였습니다.
+
+### 3. 중심 벡터 기반 유사도 분석
+
+광고 리뷰와 비광고 리뷰 각각의 평균 벡터를 계산한 뒤, 코사인 유사도로 "광고성 리뷰 집단과 구조적으로 얼마나 유사한가"를 수치화하였습니다.
+
+<br>
+
+## 📊 통계적 검증
+
+### Welch's t-test
+광고 리뷰 집단과 비광고 리뷰 집단의 유사도 분포 차이를 검증한 결과, **p-value < 0.001** 수준의 유의미한 차이를 확인하였습니다.
+
+### Cohen's d
+
+| 모델 | 광고 평균 유사도 | 비광고 평균 유사도 | Cohen's d |
+|------|:--------------:|:----------------:|:---------:|
+| 기존 모델 | 0.911 | 0.904 | 0.078 |
+| 파인튜닝 + 키워드 가중치 | 0.802 | 0.679 | **0.564** |
+
+결과적으로 약 **7.2배** 높은 집단 분리 효과를 확인하였습니다.
+
+<br>
+
+## 📐 성능 평가 방식
+
+일반적인 분류 모델과 달리, 광고성 리뷰는 절대적인 정답을 정의하기 어렵습니다. 실제로 협찬을 받았더라도 진솔하게 작성된 리뷰가 존재할 수 있으며, 반대의 경우도 마찬가지입니다.
+
+따라서 본 프로젝트는 개별 리뷰의 정답 여부보다 **광고성 리뷰 집단과 일반 리뷰 집단이 임베딩 공간에서 얼마나 명확하게 분리되는가**를 핵심 지표로 설정하였습니다.
+
+<br>
+
+## 📊 결과 요약
+
+- 대조학습 기반 파인튜닝과 키워드 가중치 보정으로 집단 분리도(Cohen's d) **약 7.2배 향상**
+- **p-value < 0.001** 수준의 통계적 유의성 확보
+- Gemini 기반 리뷰 요약 기능과 OCR 기능으로 사용자 경험 개선
+- Spring Boot, FastAPI, React를 연계한 원스톱 서비스 구현
+
+<br>
+
+## 💡 프로젝트를 통한 인사이트
+
+초기에는 모델 성능 개선을 위해 더 큰 모델로 교체하는 방향을 고려하였습니다. 그러나 비교 분석 결과, MiniLM의 경량성과 임베딩 성능이 우수하다는 점을 확인하였고, 모델 교체 대신 다음 세 가지에 집중하였습니다.
+
+- 데이터 품질 개선
+- 대조학습 기반 파인튜닝
+- 키워드 가중치 보정
+
+그 결과 경량 모델을 유지하면서도 의미 있는 성능 향상을 달성할 수 있었습니다.
