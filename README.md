@@ -26,11 +26,25 @@
 
 <br>
 
+## 🎬 시연 영상
+
+[![시연 영상](https://img.shields.io/badge/YouTube-시연영상_보기-FF0000?style=flat&logo=youtube&logoColor=white)](링크를_여기에_넣어주세요)
+
+<br>
+
 ## 🖼️ 화면 구성
 
-| 시작 페이지 | 메인 페이지 | 분석 완료 |
-|:-----------:|:----------:|:--------:|
-| ![시작](./assets/AdbyeIntro.png) | ![메인](./assets/AdbyeMain.png) | ![분석완료](./assets/AdbyeHistory.png) |
+### 시작 페이지
+![시작](./assets/AdbyeIntro.png)
+
+### 메인 페이지
+![메인](./assets/AdbyeMain.png)
+
+### 분석 완료
+> 스크린샷 준비 중입니다.
+
+### 히스토리 페이지
+![히스토리](./assets/AdbyeHistory.png)
 
 <br>
 
