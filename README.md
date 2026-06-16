@@ -28,7 +28,7 @@
 
 ## 🎬 시연 영상
 
-[![시연 영상](https://img.shields.io/badge/YouTube-시연영상_보기-FF0000?style=flat&logo=youtube&logoColor=white)](링크를_여기에_넣어주세요)
+[![시연 영상](https://img.shields.io/badge/Google_Drive-시연영상_보기-4285F4?style=flat&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/161o4ZQyppHyuGqnAhZx2SVGgy8XrGrBc/view?usp=sharing)
 
 <br>
 
