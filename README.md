@@ -30,9 +30,7 @@
 
 | 시작 페이지 | 메인 페이지 | 분석 완료 |
 |:-----------:|:----------:|:--------:|
-| ![시작](./screenshots/start.png) | ![메인](./screenshots/main.png) | ![분석완료](./screenshots/result.png) |
-
-> 스크린샷은 `screenshots/` 폴더에 `start.png`, `main.png`, `result.png` 이름으로 넣어주세요.
+| ![시작](./assets/AdbyeIntro.png) | ![메인](./assets/AdbyeMain.png) | ![분석완료](./assets/AdbyeHistory.png) |
 
 <br>
 
